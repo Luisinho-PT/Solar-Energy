@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/client_detail.css' %}">
+
+<div class="container">
+    <h2>Detalhes do Cliente</h2>
+
+    <div class="card-info">
+        <p><strong>Nome/Razão Social:</strong> {{ client.nome }}{{ client.razao_social }}</p>
+        <p><strong>Email:</strong> {{ client.email }}</p>
+        <p><strong>Telefone:</strong> {{ client.telefone_principal }}</p>
+        <p><strong>Endereço:</strong> {{ client.logradouro }}, {{ client.numero }} - {{ client.cidade }} / {{ client.estado }}</p>
+        <p><strong>CEP:</strong> {{ client.cep }}</p>
+    </div>
+
+    <div class="actions">
+        <a class="btn-edit" href="{% url 'clients:client_edit' client.id %}">Editar</a>
+        <a class="btn-gray" href="{% url 'clients:client_list' %}">Voltar</a>
+    </div>
+</div>
+{% endblock %}

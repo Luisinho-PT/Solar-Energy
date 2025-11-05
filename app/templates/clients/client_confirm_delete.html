@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/client_delete.css' %}">
+
+<div class="container">
+    <h2>Excluir Cliente</h2>
+
+    <div class="confirm-box">
+        <p>Tem certeza que deseja excluir o cliente <strong>{{ client.nome }}{{ client.razao_social }}</strong>?</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn-delete">Excluir</button>
+            <a href="{% url 'clients:client_list' %}" class="btn-gray">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

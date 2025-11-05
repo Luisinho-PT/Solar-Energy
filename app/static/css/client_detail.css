@@ -1,0 +1,40 @@
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+    padding-top: 25px;
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+.card-info {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    line-height: 1.7em;
+    font-size: 16px;
+}
+
+.actions {
+    margin-top: 15px;
+}
+
+.btn-edit, .btn-gray {
+    padding: 8px 14px;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-right: 5px;
+    color: white;
+}
+
+.btn-edit {
+    background: #ffc107;
+    color: black;
+}
+
+.btn-gray {
+    background: #666;
+}

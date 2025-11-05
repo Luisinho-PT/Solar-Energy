@@ -1,0 +1,107 @@
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    padding-top: 20px;
+}
+
+h2 {
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.type-selector {
+    margin-bottom: 20px;
+}
+
+.toggle {
+    padding: 8px 15px;
+    border: 1px solid #0066ff;
+    background: white;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.2s;
+    margin-right: 8px;
+}
+
+.toggle.active {
+    background: #0066ff;
+    color: white;
+}
+
+.form-section {
+    margin-bottom: 25px;
+}
+
+.hidden {
+    display: none;
+}
+
+.row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.col {
+    flex: 1;
+    min-width: 230px;
+    display: flex;
+    flex-direction: column;
+}
+
+.col.small {
+    max-width: 120px;
+}
+
+/* --- CORREÇÃO ADICIONADA --- */
+/* Estilo para os labels ("nomes") */
+.col label {
+    display: block; /* Ocupa a própria linha */
+    margin-bottom: 5px; /* Espaço entre o label e o input */
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+}
+
+/* --- BLOCO ATUALIZADO --- */
+/* Inputs agora com 100% de largura */
+input, select {
+    padding: 7px;
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+    width: 100%; /* Faz o input ocupar todo o espaço da .col */
+    box-sizing: border-box; /* Impede que o padding quebre o layout */
+}
+/* --- FIM DA CORREÇÃO --- */
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-green {
+    padding: 8px 14px;
+    background: #1dbb4b;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.btn-gray {
+    padding: 8px 14px;
+    background: #777;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}

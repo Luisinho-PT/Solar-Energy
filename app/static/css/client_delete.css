@@ -1,0 +1,36 @@
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    padding-top: 25px;
+}
+
+.confirm-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    font-size: 18px;
+}
+
+form {
+    margin-top: 15px;
+}
+
+.btn-delete {
+    background: #dc3545;
+    padding: 8px 14px;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-gray {
+    padding: 8px 14px;
+    background: #777;
+    color: white;
+    margin-left: 10px;
+    text-decoration: none;
+    border-radius: 6px;
+}
