@@ -15,6 +15,29 @@ class ClientCreateView(CreateView):
     template_name = 'clients/client_form.html'
     success_url = reverse_lazy('clients:client_list')
 
+    def get_initial(self):
+        """ Pré-preenche o campo 'client_type' com base no query parameter. """
+        initials = super().get_initial()
+        
+        # Pega o 'tipo' da URL (ex: ?tipo=pf)
+        client_type_slug = self.request.GET.get('tipo')
+        
+        if client_type_slug == 'pf':
+            initials['client_type'] = Client.TYPE_PF
+        elif client_type_slug == 'pj':
+            initials['client_type'] = Client.TYPE_PJ
+            
+        return initials
+
+    def get_context_data(self, **kwargs):
+        """ Adiciona a variável 'tipo' ao contexto do template. """
+        context = super().get_context_data(**kwargs)
+        
+        # Passa o 'tipo' (pf ou pj) para o template
+        context['tipo'] = self.request.GET.get('tipo', 'pf') # 'pf' como padrão
+        
+        return context
+
 class ClientUpdateView(UpdateView):
     model = Client
     form_class = ClientForm

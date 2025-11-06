@@ -1,46 +1,46 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/client_list.css' %}">
+{% endblock %}
+
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/client_list.css' %}">
-
-<div class="container">
-    <h2>Clientes</h2>
-
-    <div class="table-card">
-        <table>
-            <thead>
-                <tr>
-                    <th>Nome / Razão Social</th>
-                    <th>Telefone</th>
-                    <th>E-mail</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for cliente in clients %}
-                <tr>
-                    <td>{{ cliente.nome }}{{ cliente.razao_social }}</td>
-                    <td>{{ cliente.telefone_principal }}</td>
-                    <td>{{ cliente.email }}</td>
-                    <td>{{ cliente.status|default:'Ativo' }}</td>
-                    <td>
-                        <a class="btn-edit" href="{% url 'clients:client_edit' cliente.id %}">Editar</a>
-                        <a class="btn-view" href="{% url 'clients:client_detail' cliente.id %}">Ver</a>
-                        <a class="btn-delete" href="{% url 'clients:client_delete' cliente.id %}">Excluir</a>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr><td colspan="5" class="empty">Nenhum cliente cadastrado.</td></tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<div class="container"> <div class="list-header">
+        <h2>Lista de Clientes</h2>
     </div>
 
-    <div class="actions">
-        <a href="{% url 'clients:client_new' %}" class="btn-green">+ Novo Cliente</a>
-    </div>
+    <table class="client-table">
+        <thead>
+            <tr>
+                <th>Nome / Razão Social</th>
+                <th>Tipo</th>
+                <th>Contato (E-mail/Telefone)</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+            <tr>
+                <td>{{ client }}</td> 
+                <td>{{ client.get_client_type_display }}</td> 
+                <td>{{ client.email|default:client.phone }}</td>
+                <td>
+                    <a href="{% url 'clients:client_edit' client.pk %}" class="btn-edit">Editar</a>
+                    <a href="{% url 'clients:client_delete' client.pk %}" class="btn-delete">Excluir</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Nenhum cliente cadastrado ainda.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+        <a href="{% url 'clients:client_select_type' %}" class="btn-green">
+            Cadastrar Novo Cliente
+        </a>
+
 </div>
 {% endblock %}

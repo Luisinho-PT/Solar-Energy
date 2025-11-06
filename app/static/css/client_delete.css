@@ -1,3 +1,5 @@
+/* client_delete.css (Modernizado) */
+
 .container {
     width: 90%;
     max-width: 600px;
@@ -6,31 +8,53 @@
 }
 
 .confirm-box {
-    background: #fff;
-    padding: 20px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.1);
     font-size: 18px;
 }
 
+.confirm-box p {
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+}
+
+/* Destaque para o item sendo excluído */
+.confirm-box strong {
+    color: var(--color-warning); 
+}
+
 form {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .btn-delete {
-    background: #dc3545;
-    padding: 8px 14px;
+    background: var(--color-danger);
+    padding: 10px 16px;
     color: white;
+    font-weight: bold;
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.btn-delete:hover {
+    background: #C0392B; /* Vermelho mais escuro */
 }
 
+/* Botão Voltar (Secundário) */
 .btn-gray {
-    padding: 8px 14px;
-    background: #777;
-    color: white;
+    padding: 10px 16px;
+    background: var(--color-surface);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
     margin-left: 10px;
     text-decoration: none;
     border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.btn-gray:hover {
+    background: var(--color-border);
+    color: var(--color-text);
 }

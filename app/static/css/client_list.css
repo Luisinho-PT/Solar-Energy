@@ -1,6 +1,9 @@
+/* client_list.css (Modernizado) */
+
 .container {
     width: 90%;
-    max-width: 1000px;
+    /* Max-width maior para listas */
+    max-width: 1200px; 
     margin: auto;
     padding-top: 25px;
 }
@@ -10,11 +13,13 @@ h2 {
     margin-bottom: 18px;
 }
 
+/* Trocado para .table-card para não conflitar com .card */
 .table-card {
-    background: #fff;
-    padding: 15px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 8px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.15);
+    /* Overflow hidden para o radius funcionar no thead */
+    overflow: hidden; 
 }
 
 table {
@@ -23,59 +28,80 @@ table {
     font-size: 15px;
 }
 
+/* Cabeçalho da Tabela em Dourado */
 thead {
-    background: #0066ff;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-bg); /* Texto preto */
 }
 
 thead th {
-    padding: 10px;
+    padding: 12px 15px; /* Mais padding */
     text-align: left;
+    font-weight: 600;
 }
 
 tbody td {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+}
+
+/* Linhas com hover */
+tbody tr:hover {
+    background: var(--color-bg);
+}
+
+/* Tira a borda da última linha */
+tbody tr:last-child td {
+    border-bottom: none;
 }
 
 .empty {
     text-align: center;
-    padding: 20px;
-    color: #555;
+    padding: 30px;
+    color: var(--color-text-secondary);
 }
 
+/* Botões de Ação na Tabela */
+.btn-edit, .btn-view, .btn-delete {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    margin-right: 4px;
+    font-size: 14px;
+    border: none;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+.btn-edit:hover, .btn-view:hover, .btn-delete:hover {
+    transform: scale(1.05); /* Efeito de "lift" */
+}
+
+.btn-edit {
+    background: var(--color-warning);
+    color: black;
+}
+
+.btn-delete {
+    background: var(--color-danger);
+    color: white;
+}
+
+/* Botão "Novo" (antigo .btn-green) */
 .actions {
     margin-top: 15px;
     text-align: right;
 }
 
 .btn-green {
-    background: #1dbb4b;
-    padding: 8px 14px;
-    color: white;
+    background: var(--color-primary);
+    padding: 10px 16px;
+    color: var(--color-bg);
+    font-weight: bold;
     text-decoration: none;
     border-radius: 6px;
+    transition: background-color 0.2s ease;
 }
-
-.btn-edit, .btn-view, .btn-delete {
-    text-decoration: none;
-    padding: 5px 8px;
-    border-radius: 6px;
-    margin-right: 4px;
-    font-size: 14px;
-}
-
-.btn-edit {
-    background: #ffc107;
-    color: black;
-}
-
-.btn-view {
-    background: #0dcaf0;
-    color: black;
-}
-
-.btn-delete {
-    background: #dc3545;
-    color: white;
+.btn-green:hover {
+    background: var(--color-primary-hover);
 }

@@ -1,7 +1,7 @@
 from django import forms
 from .models import Client
 
-# Widget para forçar o input de data
+# Widget para forçar o input de data (calendário)
 class DateInput(forms.DateInput):
     input_type = 'date'
 
@@ -9,34 +9,46 @@ class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
         
-        # Lista explícita dos campos que seu HTML usa
+        #
+        # --- A CORREÇÃO ESTÁ AQUI ---
+        # Esta lista DEVE incluir TODOS os campos que seu HTML usa.
+        #
         fields = [
-            # PF
+            # Campo oculto que define o tipo (PF ou PJ)
+            'client_type', 
+            
+            # Campos de Pessoa Física
             'name', 'cpf', 'rg', 'birth_date',
             
-            # PJ
+            # Campos de Pessoa Jurídica
             'company_name', 'fantasy_name', 'cnpj', 'inscricao_estadual',
             
-            # Contato & Endereço
+            # Contato & Endereço (campos comuns)
             'email', 'phone', 'phone2',
             'cep', 'logradouro', 'numero', 'bairro', 'cidade', 'estado', 'pais',
         ]
         
-        # Adiciona o widget de calendário ao campo de data
+        # Widgets controlam a aparência dos campos
         widgets = {
+            # 1. Oculta o campo 'client_type' (ele é preenchido pela URL)
+            'client_type': forms.HiddenInput(),
+            
+            # 2. Usa o widget de calendário para o campo de data
             'birth_date': DateInput(),
             
-            # Definindo 'required=False' aqui para todos os campos
-            # A validação real de "obrigatório" será feita pelo 
-            # método clean() do seu models.py, com base no tipo de cliente.
+            # 3. Define todos os campos como 'required=False' no HTML.
+            #    A validação real (quais são obrigatórios) 
+            #    já está sendo feita no seu models.py (método clean).
             'name': forms.TextInput(attrs={'required': False}),
             'cpf': forms.TextInput(attrs={'required': False}),
             'rg': forms.TextInput(attrs={'required': False}),
             'birth_date': DateInput(attrs={'required': False}),
+            
             'company_name': forms.TextInput(attrs={'required': False}),
             'fantasy_name': forms.TextInput(attrs={'required': False}),
             'cnpj': forms.TextInput(attrs={'required': False}),
             'inscricao_estadual': forms.TextInput(attrs={'required': False}),
+            
             'email': forms.EmailInput(attrs={'required': False}),
             'phone': forms.TextInput(attrs={'required': False}),
             'phone2': forms.TextInput(attrs={'required': False}),

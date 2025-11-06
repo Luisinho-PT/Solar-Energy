@@ -1,3 +1,5 @@
+/* client_detail.css (Modernizado) */
+
 .container {
     width: 90%;
     max-width: 900px;
@@ -7,34 +9,63 @@
 
 h2 {
     margin-bottom: 15px;
+    color: var(--color-text);
 }
 
 .card-info {
-    background: #fff;
-    padding: 20px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.1);
     line-height: 1.7em;
     font-size: 16px;
 }
 
-.actions {
-    margin-top: 15px;
+/* TRICK: Estilo para dados (label e valor) */
+.card-info p {
+    display: flex;
+    margin-bottom: 10px;
+}
+.card-info p strong {
+    color: var(--color-text-secondary);
+    width: 180px; /* Alinha os valores */
+    flex-shrink: 0;
+}
+.card-info p span {
+    color: var(--color-text);
 }
 
-.btn-edit, .btn-gray {
-    padding: 8px 14px;
+
+.actions {
+    margin-top: 20px;
+}
+
+/* Botão Editar */
+.btn-edit {
+    padding: 10px 16px;
     text-decoration: none;
     border-radius: 6px;
     margin-right: 5px;
-    color: white;
-}
-
-.btn-edit {
-    background: #ffc107;
     color: black;
+    background: var(--color-warning);
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+.btn-edit:hover {
+    background: #D68910; /* Laranja mais escuro */
 }
 
+/* Botão Voltar (Secundário) */
 .btn-gray {
-    background: #666;
+    padding: 10px 16px;
+    background: var(--color-surface);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.btn-gray:hover {
+    background: var(--color-border);
+    color: var(--color-text);
 }

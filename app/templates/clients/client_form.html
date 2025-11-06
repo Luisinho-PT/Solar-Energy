@@ -6,22 +6,22 @@
 <script defer src="{% static 'js/client_form.js' %}"></script>
 
 <div class="container">
-    <h2>Cadastro de Cliente</h2>
+    <h2>
+        Cadastro de Cliente: 
+        {% if tipo == 'pf' %}Pessoa Física{% else %}Pessoa Jurídica{% endif %}
+    </h2>
 
     <div class="card">
 
-        <div class="type-selector">
-            <button type="button" id="btnFisica" class="toggle active">Pessoa Física</button>
-            <button type="button" id="btnJuridica" class="toggle">Pessoa Jurídica</button>
-        </div>
-
         <form method="post">
             {% csrf_token %}
+            
+            {{ form.client_type }}
 
-            <div id="formPF" class="form-section">
+            <div id="formPF" class="form-section {% if tipo == 'pj' %}hidden{% endif %}">
                 <h3>Dados da Pessoa Física</h3>
-
                 <div class="row">
+                    
                     <div class="col">
                         {{ form.name.label_tag }} {{ form.name }}
                     </div>
@@ -34,13 +34,13 @@
                     <div class="col">
                         {{ form.birth_date.label_tag }} {{ form.birth_date }}
                     </div>
-                </div>
+                    </div>
             </div>
 
-            <div id="formPJ" class="form-section hidden">
+            <div id="formPJ" class="form-section {% if tipo == 'pf' %}hidden{% endif %}">
                 <h3>Dados da Pessoa Jurídica</h3>
-
                 <div class="row">
+
                     <div class="col">
                         {{ form.company_name.label_tag }} {{ form.company_name }}
                     </div>
@@ -53,11 +53,12 @@
                     <div class="col">
                         {{ form.inscricao_estadual.label_tag }} {{ form.inscricao_estadual }}
                     </div>
-                </div>
+                    </div>
             </div>
 
             <h3>Contato & Endereço</h3>
             <div class="row">
+
                 <div class="col">
                     {{ form.email.label_tag }} {{ form.email }}
                 </div>
@@ -88,7 +89,7 @@
                 <div class="col">
                     {{ form.pais.label_tag }} {{ form.pais }}
                 </div>
-            </div>
+                </div>
 
             <div class="actions">
                 <button type="submit" class="btn-green">Salvar</button>

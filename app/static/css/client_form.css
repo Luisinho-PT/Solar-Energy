@@ -1,3 +1,5 @@
+/* client_form.css (Modernizado) */
+
 .container {
     width: 90%;
     max-width: 1000px;
@@ -11,29 +13,33 @@ h2 {
 }
 
 .card {
-    background: #fff;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
 }
 
+/* Botões de Toggle (PF/PJ) */
 .type-selector {
     margin-bottom: 20px;
 }
 
 .toggle {
     padding: 8px 15px;
-    border: 1px solid #0066ff;
-    background: white;
+    border: 1px solid var(--color-primary);
+    background: var(--color-surface);
+    color: var(--color-primary);
     cursor: pointer;
     border-radius: 6px;
-    transition: 0.2s;
+    transition: 0.2s ease;
     margin-right: 8px;
 }
 
+/* Estado Ativo do Toggle usa as cores primárias */
 .toggle.active {
-    background: #0066ff;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-bg); /* Texto preto para contrastar com dourado */
+    font-weight: bold;
 }
 
 .form-section {
@@ -61,27 +67,35 @@ h2 {
     max-width: 120px;
 }
 
-/* --- CORREÇÃO ADICIONADA --- */
-/* Estilo para os labels ("nomes") */
+/* Labels */
 .col label {
-    display: block; /* Ocupa a própria linha */
-    margin-bottom: 5px; /* Espaço entre o label e o input */
+    display: block;
+    margin-bottom: 5px;
     font-weight: 600;
     font-size: 14px;
-    color: #333;
+    color: var(--color-text-secondary); /* Cor secundária */
 }
 
-/* --- BLOCO ATUALIZADO --- */
-/* Inputs agora com 100% de largura */
+/* Inputs e Selects (Dark Mode) */
 input, select {
-    padding: 7px;
-    border: 1px solid #d1d1d1;
+    padding: 10px; /* Mais padding */
+    border: 1px solid var(--color-border);
+    background: var(--color-bg); /* Fundo mais escuro */
+    color: var(--color-text); /* Texto branco */
     border-radius: 5px;
-    width: 100%; /* Faz o input ocupar todo o espaço da .col */
-    box-sizing: border-box; /* Impede que o padding quebre o layout */
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-/* --- FIM DA CORREÇÃO --- */
 
+/* TRICK: Efeito de foco sutil usando a cor primária */
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(230, 184, 0, 0.3); /* Sombra dourada */
+}
+
+/* Botões de Ação */
 .actions {
     display: flex;
     justify-content: flex-end;
@@ -89,19 +103,32 @@ input, select {
     margin-top: 15px;
 }
 
+/* Botão Salvar (agora Dourado) */
 .btn-green {
-    padding: 8px 14px;
-    background: #1dbb4b;
-    color: white;
+    padding: 10px 16px;
+    background: var(--color-primary);
+    color: var(--color-bg); /* Texto preto */
+    font-weight: bold;
     border: none;
     cursor: pointer;
     border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+.btn-green:hover {
+    background: var(--color-primary-hover);
 }
 
+/* Botão Voltar (agora sutil) */
 .btn-gray {
-    padding: 8px 14px;
-    background: #777;
-    color: white;
+    padding: 10px 16px;
+    background: var(--color-surface);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
     text-decoration: none;
     border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.btn-gray:hover {
+    background: var(--color-border);
+    color: var(--color-text);
 }
