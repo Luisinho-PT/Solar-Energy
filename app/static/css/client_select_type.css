@@ -1,4 +1,4 @@
-/* client_select_type.css (Modernizado com Glow no Hover) */
+/* client_select_type.css (Modernizado com Glow) */
 
 .selection-container {
     width: 90%;
@@ -31,20 +31,20 @@
     border-radius: 8px;
     transition: 0.3s ease; /* Transição mais suave para o glow */
     box-sizing: border-box;
-    /* Adiciona uma sombra inicial invisível para a transição */
+    /* Sombra inicial invisível para a transição */
     box-shadow: 0 0 0px rgba(230, 184, 0, 0); 
 }
 
 /* Botão PF (Primário - Dourado) */
 .btn-pf {
-    background-color: transparent;
-    color: var(--color-primary); /* Preto */
+    background-color: var(--color-primary);
+    color: var(--color-bg); /* Preto */
     border: 2px solid var(--color-primary);
 }
 .btn-pf:hover {
-    color: var(--color-bg);
     background-color: var(--color-primary-hover);
     border-color: var(--color-primary-hover);
+    /* O GLOW Dourado */
     box-shadow: 0 0 15px rgba(230, 184, 0, 0.7); /* Brilho dourado forte */
     transform: translateY(-2px); /* Efeito de "levitar" sutil */
 }
@@ -58,6 +58,7 @@
 .btn-pj:hover {
     background-color: var(--color-primary);
     color: var(--color-bg);
+    /* O GLOW Dourado */
     box-shadow: 0 0 15px rgba(230, 184, 0, 0.7); /* Brilho dourado forte */
     transform: translateY(-2px); /* Efeito de "levitar" sutil */
 }

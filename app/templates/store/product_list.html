@@ -1,0 +1,65 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block head %}
+    <!-- Carrega o novo CSS da loja -->
+    <link rel="stylesheet" href="{% static 'css/store.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="store-layout">
+    
+    <!-- 1. BARRA DE NAVEGAÇÃO DE CATEGORIAS -->
+    <aside class="category-nav">
+        <h3>Categorias</h3>
+        <ul>
+            <!-- Botão "Todas as Categorias" (Link para app:product_list) -->
+            <li>
+                <a href="{% url 'app:product_list' %}" 
+                   class="{% if not current_category_slug %}active{% endif %}">
+                   Todas as Categorias
+                </a>
+            </li>
+            
+            <!-- Itera sobre as categorias -->
+            {% for c in categories %}
+            <li>
+                <a href="{{ c.get_absolute_url }}" 
+                   class="{% if c.slug == current_category_slug %}active{% endif %}">
+                    {{ c.icon }} {{ c.name }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </aside>
+
+    <!-- 2. GRADE DE PRODUTOS -->
+    <main class="product-grid-container">
+        <div class="product-grid">
+            
+            {% for product in products %}
+            <div class="product-card">
+                <a href="{{ product.get_absolute_url }}">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="https://placehold.co/400x300/e0e0e0/777?text=Sem+Foto" alt="Sem Foto">
+                    {% endif %}
+                </a>
+                <div class="product-card-content">
+                    <h4>{{ product.name }}</h4>
+                    <p class="product-card-description">{{ product.description|truncatechars:70 }}</p>
+                    <div class="product-card-footer">
+                        <span class="product-card-price">R$ {{ product.price }}</span>
+                        <a href="{{ product.get_absolute_url }}" class="btn-details">Ver mais</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+                <p>Nenhum produto encontrado nesta categoria.</p>
+            {% endfor %}
+
+        </div>
+    </main>
+</div>
+{% endblock %}

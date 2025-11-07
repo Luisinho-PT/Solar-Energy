@@ -1,18 +1,21 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-{% block content %}
+{% block head %}
 <link rel="stylesheet" href="{% static 'css/client_delete.css' %}">
+{% endblock %}
 
+{% block content %}
 <div class="container">
-    <h2>Excluir Cliente</h2>
-
     <div class="confirm-box">
-        <p>Tem certeza que deseja excluir o cliente <strong>{{ client.nome }}{{ client.razao_social }}</strong>?</p>
-
+        <h2>Confirmar Exclusão</h2>
+        
+        <p>Você tem certeza que deseja excluir o cliente: <strong>{{ object }}</strong>?</p>
+        <p style="color: var(--color-danger); font-weight: bold;">Esta ação não pode ser desfeita.</p>
+        
         <form method="post">
             {% csrf_token %}
-            <button type="submit" class="btn-delete">Excluir</button>
+            <button type="submit" class="btn-delete">Sim, Excluir</button>
             <a href="{% url 'clients:client_list' %}" class="btn-gray">Cancelar</a>
         </form>
     </div>

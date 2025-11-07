@@ -13,7 +13,6 @@ h2 {
     margin-bottom: 18px;
 }
 
-/* Trocado para .table-card para não conflitar com .card */
 .table-card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -65,32 +64,34 @@ tbody tr:last-child td {
 /* Botões de Ação na Tabela */
 .btn-edit, .btn-view, .btn-delete {
     text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 6px;
+    padding: 6px 12px;
+    border-radius: 5px;
     margin-right: 4px;
     font-size: 14px;
     border: none;
     transition: transform 0.2s ease;
     cursor: pointer;
+    display: inline-block; /* Garante que a margin funcione */
 }
 .btn-edit:hover, .btn-view:hover, .btn-delete:hover {
     transform: scale(1.05); /* Efeito de "lift" */
 }
 
+/* CORREÇÃO DE ESPAÇAMENTO: Adiciona margem à direita do botão editar */
 .btn-edit {
     background: var(--color-warning);
-    color: black;
+    color: var(--color-black);
+    margin-right: 8px; /* <-- AQUI A CORREÇÃO DE ESPAÇAMENTO */
 }
 
 .btn-delete {
     background: var(--color-danger);
-    color: white;
+    color: var(--color-white);
 }
 
-/* Botão "Novo" (antigo .btn-green) */
-.actions {
-    margin-top: 15px;
-    text-align: right;
+/* Botão "Novo" (Cadastrar Novo Cliente) */
+.list-header {
+    margin-bottom: 20px;
 }
 
 .btn-green {

@@ -32,7 +32,7 @@ form {
 .btn-delete {
     background: var(--color-danger);
     padding: 10px 16px;
-    color: white;
+    color: var(--color-white);
     font-weight: bold;
     border: none;
     border-radius: 6px;
@@ -40,7 +40,7 @@ form {
     transition: background-color 0.2s ease;
 }
 .btn-delete:hover {
-    background: #C0392B; /* Vermelho mais escuro */
+    background: var(--color-danger-hover); /* Vermelho mais escuro */
 }
 
 /* Botão Voltar (Secundário) */

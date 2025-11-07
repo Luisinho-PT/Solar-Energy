@@ -1,0 +1,82 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/store.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-top: 25px;">
+    <div class="card" style="background: var(--color-surface); padding: 30px;">
+        
+        <!-- Link de "Voltar" (para app:product_list_by_category) -->
+        <a href="{% url 'app:product_list_by_category' product.category.slug %}" style="color: var(--color-primary);">&larr; Voltar para {{ product.category.name }}</a>
+        
+        <div style="display: flex; gap: 30px; margin-top: 20px;">
+            <!-- Coluna da Imagem -->
+            <div style="flex: 1;">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; border-radius: 8px;">
+                {% else %}
+                    <img src="https://placehold.co/600x600/e0e0e0/777?text=Sem+Foto" alt="Sem Foto" style="width: 100%; border-radius: 8px;">
+                {% endif %}
+            </div>
+
+            <!-- Coluna de Informações -->
+            <div style="flex: 1;">
+                <h1 style="font-size: 32px; color: var(--color-text);">{{ product.name }}</h1>
+                
+                {% if product.brand %}
+                <p style="color: var(--color-text-secondary); font-size: 18px;">Marca: {{ product.brand.name }}</p>
+                {% endif %}
+
+                <span class="product-card-price" style="font-size: 36px; display: block; margin-top: 20px;">R$ {{ product.price }}</span>
+                
+                <p style="color: var(--color-primary); font-weight: bold; margin-top: 20px;">
+                    {% if product.stock > 0 %}
+                        Em estoque ({{ product.stock }} unidades)
+                    {% else %}
+                        Fora de estoque
+                    {% endif %}
+                </p>
+
+                <p style="color: var(--color-text-secondary); line-height: 1.6; margin-top: 20px;">
+                    {{ product.detailed_description|linebreaks }}
+                </p>
+
+                <!-- Botão Adicionar ao Carrinho -->
+                {% if product.available %}
+                    <a href="#" class="btn-details" style="padding: 15px 25px; font-size: 18px; margin-top: 30px; display: inline-block;">
+                        Adicionar ao Carrinho
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Produtos Relacionados -->
+        {% if related_products %}
+        <h3 style="margin-top: 50px; border-top: 1px solid var(--color-border); padding-top: 30px;">Produtos Relacionados</h3>
+        <div class="product-grid" style="margin-top: 20px;">
+            {% for p in related_products %}
+            <div class="product-card">
+                <a href="{{ p.get_absolute_url }}">
+                    {% if p.image %}
+                        <img src="{{ p.image.url }}" alt="{{ p.name }}">
+                    {% else %}
+                        <img src="https://placehold.co/400x300/e0e0e0/777?text=Sem+Foto" alt="Sem Foto">
+                    {% endif %}
+                </a>
+                <div class="product-card-content">
+                    <h4>{{ p.name }}</h4>
+                    <div class="product-card-footer">
+                        <span class="product-card-price">R$ {{ p.price }}</span>
+                        <a href="{{ p.get_absolute_url }}" class="btn-details">Ver mais</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/client_form.css' %}">
+<script defer src="{% static 'js/client_form.js' %}"></script>
+
+<div class="container">
+    <h2>Cadastro de Cliente: Pessoa Jurídica</h2>
+    <div class="card">
+        <form method="post">
+            {% csrf_token %}
+            
+            <h3>Dados da Pessoa Jurídica</h3>
+            <div class="row">
+                <div class="col">{{ form.company_name.label_tag }} {{ form.company_name }}</div>
+                <div class="col">{{ form.fantasy_name.label_tag }} {{ form.fantasy_name }}</div>
+                <div class="col">{{ form.cnpj.label_tag }} {{ form.cnpj }}</div>
+                <div class="col">{{ form.inscricao_estadual.label_tag }} {{ form.inscricao_estadual }}</div>
+            </div>
+
+            <h3>Contato & Endereço</h3>
+            <div class="row">
+                <div class="col">{{ form.email.label_tag }} {{ form.email }}</div>
+                <div class="col">{{ form.phone.label_tag }} {{ form.phone }}</div>
+                <div class="col">{{ form.phone2.label_tag }} {{ form.phone2 }}</div>
+                <div class="col">{{ form.cep.label_tag }} {{ form.cep }}</div>
+                <div class="col">{{ form.logradouro.label_tag }} {{ form.logradouro }}</div>
+                <div class="col small">{{ form.numero.label_tag }} {{ form.numero }}</div>
+                <div class="col">{{ form.bairro.label_tag }} {{ form.bairro }}</div>
+                <div class="col">{{ form.cidade.label_tag }} {{ form.cidade }}</div>
+                <div class="col">{{ form.estado.label_tag }} {{ form.estado }}</div>
+                <div class="col">{{ form.pais.label_tag }} {{ form.pais }}</div>
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="btn-green">Salvar</button>
+                <a href="{% url 'clients:client_list' %}" class="btn-gray">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

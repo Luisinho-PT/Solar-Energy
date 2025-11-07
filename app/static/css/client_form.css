@@ -19,29 +19,6 @@ h2 {
     padding: 20px;
 }
 
-/* Botões de Toggle (PF/PJ) */
-.type-selector {
-    margin-bottom: 20px;
-}
-
-.toggle {
-    padding: 8px 15px;
-    border: 1px solid var(--color-primary);
-    background: var(--color-surface);
-    color: var(--color-primary);
-    cursor: pointer;
-    border-radius: 6px;
-    transition: 0.2s ease;
-    margin-right: 8px;
-}
-
-/* Estado Ativo do Toggle usa as cores primárias */
-.toggle.active {
-    background: var(--color-primary);
-    color: var(--color-bg); /* Texto preto para contrastar com dourado */
-    font-weight: bold;
-}
-
 .form-section {
     margin-bottom: 25px;
 }
@@ -88,7 +65,7 @@ input, select {
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* TRICK: Efeito de foco sutil usando a cor primária */
+/* Efeito de foco sutil usando a cor primária */
 input:focus, select:focus {
     outline: none;
     border-color: var(--color-primary);

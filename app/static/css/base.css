@@ -1,3 +1,7 @@
+/*
+ * base.css (Modernizado com Preto e Dourado)
+ * Este é o arquivo MAIS IMPORTANTE. Ele define as cores.
+*/
 
 /* 1. Definição da paleta de cores "Preto e Dourado" */
 :root {
@@ -10,10 +14,14 @@
     
     --color-text: #FFFFFF;          /* Texto principal (Branco) */
     --color-text-secondary: #AAAAAA;/* Texto secundário (Cinza) */
+    --color-white: #FFFFFF;
+    --color-black: #121212;
 
     /* Cores de Ação */
     --color-danger: #E74C3C;        /* Vermelho (Excluir) */
+    --color-danger-hover: #C0392B;  /* Vermelho escuro */
     --color-warning: #F39C12;       /* Laranja/Amarelo (Editar) */
+    --color-warning-hover: #D68910; /* Laranja escuro */
 }
 
 /* 2. Reset global e Fonte Moderna */
@@ -25,7 +33,6 @@
 
 body {
     margin: 0;
-    /* 3. Pilha de fontes modernas */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
                  Helvetica, Arial, sans-serif, "Apple Color Emoji", 
                  "Segoe UI Emoji", "Segoe UI Symbol";
@@ -40,8 +47,8 @@ body {
     color: var(--color-text);
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 12px 25px;
-    /* Sombra sutil foi trocada por uma borda inferior */
     border-bottom: 1px solid var(--color-border);
     position: sticky;
     top: 0;
@@ -52,6 +59,7 @@ body {
     font-weight: bold;
     font-size: 20px;
     color: var(--color-primary); /* Título do sistema em Dourado */
+    text-decoration: none;
 }
 
 .nav-links a {
@@ -62,12 +70,14 @@ body {
     transition: color 0.2s ease;
 }
 
-/* Efeito de hover dourado */
 .nav-links a:hover {
     text-decoration: none;
     color: var(--color-primary);
 }
 
-/* * 5. Removemos o .content daqui, pois cada página 
- * define seu próprio .container, o que é uma prática melhor.
- */
+/* 5. Área de conteúdo principal */
+.content {
+    width: 90%;
+    max-width: 1400px; /* Aumentado para a loja */
+    margin: auto;
+}

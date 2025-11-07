@@ -1,8 +1,7 @@
+# app/admin.py
 from django.contrib import admin
-from .models import Client
+from .models import PessoaFisica, PessoaJuridica # Importe os novos models
 
-@admin.register(Client)
-class ClientAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'email', 'phone', 'client_type', 'created_at')
-    list_filter = ('client_type', 'created_at')
-    search_fields = ('name', 'company_name', 'email', 'cpf', 'cnpj')
+# Registre os novos models no admin
+admin.site.register(PessoaFisica)
+admin.site.register(PessoaJuridica)

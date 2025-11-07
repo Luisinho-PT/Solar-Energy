@@ -1,6 +1,7 @@
+// app/static/js/client_form.js
 document.addEventListener("DOMContentLoaded", () => {
     
-    // O CÓDIGO DO TOGGLE QUE CAUSOU O ERRO FOI REMOVIDO DESTA ÁREA
+    // A LÓGICA DE TOGGLE FOI REMOVIDA
     
     // --- MANTENHA TODO O CÓDIGO DAS MÁSCARAS ---
     
@@ -33,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.target.value = value.slice(0, 9);
     });
 
-    // Máscara telefone (IDs corrigidos para id_phone e id_phone2)
+    // Máscara telefone (IDs baseados nos models: phone, phone2)
     const tels = ["id_phone", "id_phone2"]; 
     
     tels.forEach(id => {
