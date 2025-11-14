@@ -32,7 +32,7 @@
     <div class="products-grid">
       {% for p in produtos %}
         <div class="product-card">
-          <a href="{% url 'produto_detalhes' p.id %}" style="text-decoration:none; color:inherit;">
+          <a href="{% url 'app:produto_detalhes' p.id %}" style="text-decoration:none; color:inherit;">
             <div class="product-media">
               {% if p.imagem %}
                 <img src="{{ p.imagem.url }}" alt="{{ p.nome }}">
@@ -63,9 +63,9 @@
                 </div>
 
                 <div class="product-actions">
-                  <a href="{% url 'produto_detalhes' p.id %}" class="btn-card btn-details">Ver detalhes</a>
+                  <a href="{% url 'app:produto_detalhes' p.id %}" class="btn-card btn-details">Ver detalhes</a>
                   {% if p.em_estoque %}
-                    <form method="post" action="{% url 'adicionar_carrinho' %}" style="display:inline;">
+                    <form method="post" style="display:inline;">
                       {% csrf_token %}
                       <input type="hidden" name="produto_id" value="{{ p.id }}">
                       <button class="btn-card btn-buy" type="submit">🛒 Adicionar</button>

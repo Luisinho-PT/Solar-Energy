@@ -37,7 +37,7 @@
           <div class="related-grid">
             {% for r in relacionados %}
               <div class="related-card">
-                <a href="{% url 'produto_detalhes' r.id %}" style="text-decoration:none; color:inherit;">
+                <a href="{% url 'app:produto_detalhes' r.id %}" style="text-decoration:none; color:inherit;">
                   {% if r.imagem %}
                     <img src="{{ r.imagem.url }}" style="height:100px; object-fit:contain; margin-bottom:8px;">
                   {% endif %}
@@ -71,13 +71,13 @@
         </div>
 
         <div class="buy-row">
-          <form method="post" action="{% url 'adicionar_carrinho' %}">
+          <form method="post">
             {% csrf_token %}
             <input type="hidden" name="produto_id" value="{{ produto.id }}">
             <input type="number" name="quantidade" value="1" min="1" max="{{ produto.estoque }}" class="qty-input">
             {% if produto.em_estoque %}
               <button class="btn-card btn-buy" type="submit">🛒 Adicionar ao carrinho</button>
-              <button formaction="{% url 'comprar_agora' produto.id %}" class="btn-card btn-details">Comprar agora</button>
+              <button class="btn-card btn-details">Comprar agora</button>
             {% else %}
               <button class="btn-card btn-buy" disabled>Indisponível</button>
             {% endif %}
