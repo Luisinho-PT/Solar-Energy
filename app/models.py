@@ -50,7 +50,7 @@ class PessoaJuridica(ClientBase):
         return self.company_name
     
 class Categoria(models.Model):
-    categorias = [
+    CATEGORIAS = [
         ("inversores", "Inversores"),
         ("cabos", "Cabos"),
         ("estruturas", "Estruturas Inox"),
@@ -58,7 +58,7 @@ class Categoria(models.Model):
         ("baterias", "Baterias"),
     ]
 
-    slug = models.CharField(max_length=50, choices=categorias, unique=True)
+    slug = models.CharField(max_length=50, choices=CATEGORIAS, unique=True)
     nome = models.CharField(max_length=100)
 
     def __str__(self):
@@ -68,7 +68,7 @@ class Produto(models.Model):
     nome = models.CharField(max_length=150)
     descricao = models.TextField()
     preco = models.DecimalField(max_digits=10, decimal_places=2)
-    imagem = models.ImageField(upload_to="static/img/produtos")
+    imagem = models.ImageField(upload_to="produtos/")
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name="produtos")
     estoque = models.PositiveIntegerField(default=0)
 

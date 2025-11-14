@@ -35,7 +35,7 @@ def loja_home(request):
     if q:
         produtos_qs = produtos_qs.filter(nome__icontains=q) | produtos_qs.filter(descricao__icontains=q)
 
-    categoria_slug = request.GET.get('categorias') or None
+    categoria_slug = request.GET.get('categoria') or None
     if categoria_slug:
         produtos_qs = produtos_qs.filter(categoria__slug=categoria_slug)
 
