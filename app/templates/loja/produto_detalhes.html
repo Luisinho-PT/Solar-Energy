@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ produto.nome }} — Loja{% endblock %}
+
+{% block content %}
+<div class="loja-container">
+
+  <a href="{% url 'home' %}" class="category-item" style="margin-bottom:12px; display:inline-block;">← Voltar à loja</a>
+
+  <div class="product-detail">
+
+    <!-- COLUNA IMAGENS -->
+    <div>
+      <div class="detail-media">
+        <div class="detail-main-img">
+          {% if produto.imagem %}
+            <img id="mainImg" src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
+          {% else %}
+            <img id="mainImg" src="{% static 'images/placeholder-product.png' %}" alt="sem imagem">
+          {% endif %}
+        </div>
+
+        <div class="detail-thumbs">
+          {% if produto.imagem %}
+            <div class="detail-thumb" onclick="document.getElementById('mainImg').src='{{ produto.imagem.url }}'">
+              <img src="{{ produto.imagem.url }}" alt="">
+            </div>
+          {% endif %}
+          <!-- Caso queira múltiplas imagens, gere thumbs aqui -->
+        </div>
+      </div>
+
+      <!-- RECOMENDADOS -->
+      {% if relacionados %}
+        <div style="margin-top:16px">
+          <h3>Produtos relacionados</h3>
+          <div class="related-grid">
+            {% for r in relacionados %}
+              <div class="related-card">
+                <a href="{% url 'produto_detalhes' r.id %}" style="text-decoration:none; color:inherit;">
+                  {% if r.imagem %}
+                    <img src="{{ r.imagem.url }}" style="height:100px; object-fit:contain; margin-bottom:8px;">
+                  {% endif %}
+                  <div style="font-weight:700; font-size:14px;">{{ r.nome }}</div>
+                  <div style="color:var(--muted); margin-top:6px;">R$ {{ r.preco|floatformat:2 }}</div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- COLUNA INFORMAÇÕES -->
+    <div>
+      <div class="detail-info card">
+        <h1>{{ produto.nome }}</h1>
+        <div class="price">R$ {{ produto.preco|floatformat:2 }}</div>
+        <div class="sku">Código: {{ produto.id }}</div>
+
+        <div class="desc">
+          {{ produto.descricao|linebreaksbr }}
+        </div>
+
+        <div style="margin-top:12px;">
+          {% if produto.em_estoque %}
+            <span class="stock-badge in-stock">✅ Em estoque ({{ produto.estoque }})</span>
+          {% else %}
+            <span class="stock-badge out-stock">❌ Esgotado</span>
+          {% endif %}
+        </div>
+
+        <div class="buy-row">
+          <form method="post" action="{% url 'adicionar_carrinho' %}">
+            {% csrf_token %}
+            <input type="hidden" name="produto_id" value="{{ produto.id }}">
+            <input type="number" name="quantidade" value="1" min="1" max="{{ produto.estoque }}" class="qty-input">
+            {% if produto.em_estoque %}
+              <button class="btn-card btn-buy" type="submit">🛒 Adicionar ao carrinho</button>
+              <button formaction="{% url 'comprar_agora' produto.id %}" class="btn-card btn-details">Comprar agora</button>
+            {% else %}
+              <button class="btn-card btn-buy" disabled>Indisponível</button>
+            {% endif %}
+          </form>
+        </div>
+
+        <div style="margin-top:18px;">
+          <strong>Garantia:</strong> 1 ano (padrão). Consulte o produto para info detalhada.
+        </div>
+
+        <!-- AVALIAÇÕES placeholder -->
+        <div style="margin-top:14px;">
+          <strong>Avaliações:</strong>
+          <p style="color:var(--muted);">Ainda não há avaliações.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

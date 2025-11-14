@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <form method="post" class="login-card">
+        {% csrf_token %}
+        <h2>Entrar no Sistema Solar</h2>
+
+        {% if form.errors %}
+        <div class="login-error">Credenciais inválidas.</div>
+        {% endif %}
+
+        <label>Usuário</label>
+        {{ form.username }}
+
+        <label>Senha</label>
+        {{ form.password }}
+
+        <button type="submit" class="btn btn-primary">Entrar</button>
+        <a href="{% url 'register' %}" class="btn-link">Criar conta</a>
+    </form>
+</div>
+{% endblock %}

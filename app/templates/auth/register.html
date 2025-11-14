@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Registrar{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <form method="post" class="login-card">
+        {% csrf_token %}
+        <h2>Criar Conta Solar</h2>
+
+        {{ form.non_field_errors }}
+
+        <label>Usuário</label>
+        {{ form.username }}
+
+        <label>Senha</label>
+        {{ form.password1 }}
+
+        <label>Confirmar Senha</label>
+        {{ form.password2 }}
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</div>
+{% endblock %}

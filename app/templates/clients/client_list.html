@@ -1,90 +1,90 @@
-{% extends 'base/base.html' %}
-{% load static %}
+{% extends "base.html" %}
 
-{% block head %}
-    <link rel="stylesheet" href="{% static 'css/client_list.css' %}">
-{% endblock %}
+{% block title %}Clientes{% endblock %}
 
 {% block content %}
-<div class="container">
-    
-    <div class="list-header" style="display: flex; justify-content: space-between; align-items: center;">
-        <h2>Lista de Clientes</h2>
-        <!-- Botão "Novo" aponta para a seleção (usando 'app:' namespace) -->
-        <a href="{% url 'app:client_select_type' %}" class="btn-green">
-            Cadastrar Novo Cliente
-        </a>
-    </div>
+<h1>Lista de Clientes</h1>
 
-    <!-- Tabela de Pessoas Físicas -->
-    <h3 style="margin-top: 20px;">Pessoas Físicas</h3>
-    <div class="table-card">
-        <table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>E-mail</th>
-                    <th>Telefone</th>
-                    <th style="width: 150px;">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for client in pf_clients %}
-                <tr>
-                    <td>{{ client.name }}</td>
-                    <td>{{ client.cpf }}</td>
-                    <td>{{ client.email|default:"-" }}</td>
-                    <td>{{ client.phone|default:"-" }}</td>
-                    <td>
-                        <!-- Links corretos para PF (usando 'app:' namespace) -->
-                        <a href="{% url 'app:client_edit_pf' client.pk %}" class="btn-edit">Editar</a>
-                        <a href="{% url 'app:client_delete_pf' client.pk %}" class="btn-delete">Excluir</a>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5" class="empty">Nenhuma Pessoa Física cadastrada.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+<a href="{% url 'app:client_select_type' %}" class="btn btn-primary" style="margin-bottom: 20px;">
+    + Adicionar Novo Cliente
+</a>
 
-    <!-- Tabela de Pessoas Jurídicas -->
-    <h3 style="margin-top: 30px;">Pessoas Jurídicas</h3>
-    <div class="table-card">
-        <table>
-            <thead>
-                <tr>
-                    <th>Razão Social</th>
-                    <th>CNPJ</th>
-                    <th>E-mail</th>
-                    <th>Telefone</th>
-                    <th style="width: 150px;">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for client in pj_clients %}
-                <tr>
-                    <td>{{ client.company_name }}</td>
-                    <td>{{ client.cnpj }}</td>
-                    <td>{{ client.email|default:"-" }}</td>
-                    <td>{{ client.phone|default:"-" }}</td>
-                    <td>
-                        <!-- Links corretos para PJ (usando 'app:' namespace) -->
-                        <a href="{% url 'app:client_edit_pj' client.pk %}" class="btn-edit">Editar</a>
-                        <a href="{% url 'app:client_delete_pj' client.pk %}" class="btn-delete">Excluir</a>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5" class="empty">Nenhuma Pessoa Jurídica cadastrada.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+<!-- ===== CLIENTES PF ===== -->
+<div class="table-container">
+    <h2>Pessoas Físicas</h2>
 
+    {% if pf_clients %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th style="width: 180px;">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in pf_clients %}
+            <tr>
+                <td>{{ client.name }}</td>
+                <td>{{ client.cpf }}</td>
+                <td>{{ client.phone }}</td>
+                <td>{{ client.email }}</td>
+                <td class="action-buttons">
+                    <a href="{% url 'app:client_update_pf' client.pk %}" class="btn btn-primary">
+                        Editar
+                    </a>
+                    <a href="{% url 'app:client_delete_pf' client.pk %}" class="btn btn-danger">
+                        Excluir
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Nenhum cliente PF encontrado.</p>
+    {% endif %}
 </div>
+
+<!-- ===== CLIENTES PJ ===== -->
+<div class="table-container" style="margin-top: 35px;">
+    <h2>Pessoas Jurídicas</h2>
+
+    {% if pj_clients %}
+    <table>
+        <thead>
+            <tr>
+                <th>Empresa</th>
+                <th>CNPJ</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th style="width: 180px;">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in pj_clients %}
+            <tr>
+                <td>{{ client.company_name }}</td>
+                <td>{{ client.cnpj }}</td>
+                <td>{{ client.phone }}</td>
+                <td>{{ client.email }}</td>
+                <td class="action-buttons">
+                    <a href="{% url 'app:client_update_pj' client.pk %}" class="btn btn-primary">
+                        Editar
+                    </a>
+                    <a href="{% url 'app:client_delete_pj' client.pk %}" class="btn btn-danger">
+                        Excluir
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Nenhum cliente PJ encontrado.</p>
+    {% endif %}
+</div>
+
 {% endblock %}

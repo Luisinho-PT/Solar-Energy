@@ -1,24 +1,24 @@
-{% extends 'base/base.html' %}
-{% load static %}
+{% extends 'base.html' %}
 
-{% block head %}
-<link rel="stylesheet" href="{% static 'css/client_select_type.css' %}">
-{% endblock %}
+{% block title %}Selecionar Tipo de Cliente{% endblock %}
 
 {% block content %}
-<div class="selection-container">
-    <div class="selection-card">
-        <h2 class="selection-title">Como você deseja cadastrar o cliente?</h2>
-        
-        <!-- MODIFICADO: Aponta para a nova rota de PF (usando 'app:') -->
-        <a href="{% url 'app:client_create_pf' %}" class="btn-select btn-pf">
-            Pessoa Física
+<h1>Adicionar Novo Cliente</h1>
+<p>Selecione o tipo de cliente que deseja cadastrar.</p>
+
+<div class="solar-select">
+    <div class="grid">
+        <a href="{% url 'app:client_create_pf' %}" class="btn btn-primary btn-lg">
+            Pessoa Física (PF)
         </a>
 
-        <!-- MODIFICADO: Aponta para a nova rota de PJ (usando 'app:') -->
-        <a href="{% url 'app:client_create_pj' %}" class="btn-select btn-pj">
-            Pessoa Jurídica
+        <a href="{% url 'app:client_create_pj' %}" class="btn btn-secondary btn-lg">
+            Pessoa Jurídica (PJ)
         </a>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <a href="{% url 'app:client_list' %}" class="btn btn-link">Cancelar</a>
     </div>
 </div>
 {% endblock %}

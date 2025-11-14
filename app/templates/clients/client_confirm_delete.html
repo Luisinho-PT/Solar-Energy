@@ -1,23 +1,24 @@
-{% extends 'base/base.html' %}
-{% load static %}
+{% extends 'base.html' %}
 
-{% block head %}
-<link rel="stylesheet" href="{% static 'css/client_delete.css' %}">
-{% endblock %}
+{% block title %}Confirmar Exclusão{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="confirm-box">
-        <h2>Confirmar Exclusão</h2>
-        
-        <p>Você tem certeza que deseja excluir o cliente: <strong>{{ object }}</strong>?</p>
-        <p style="color: var(--color-danger); font-weight: bold;">Esta ação não pode ser desfeita.</p>
-        
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn-delete">Sim, Excluir</button>
-            <a href="{% url 'clients:client_list' %}" class="btn-gray">Cancelar</a>
-        </form>
-    </div>
+<h1>Confirmar Exclusão</h1>
+
+<div class="delete-warning">
+    Você tem certeza que deseja excluir o cliente:
+    <strong>
+        {% if object.name %}
+            {{ object.name }}
+        {% elif object.company_name %}
+            {{ object.company_name }}
+        {% endif %}
+    </strong>?
 </div>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sim, excluir</button>
+    <a href="{% url 'app:client_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
 {% endblock %}

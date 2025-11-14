@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Loja — Produtos{% endblock %}
+
+{% block content %}
+<div class="loja-container">
+
+  <!-- BARRA DE CATEGORIAS (Estilo B - retangular) -->
+  <div class="category-bar">
+    <a href="{% url 'home' %}" class="category-item {% if not categoria_ativa %}active{% endif %}">Todos</a>
+    {% for cat in categorias %}
+      <a href="{% url 'app:categoria' cat.slug %}" class="category-item {% if categoria_ativa == cat.slug %}active{% endif %}">
+        {{ cat.nome }}
+      </a>
+    {% endfor %}
+  </div>
+
+  <!-- HERO / SEARCH + CTA -->
+  <div class="store-hero">
+    <form method="get" action="{% url 'home' %}" class="search-box" style="flex:1;">
+      <input type="search" name="q" placeholder="Buscar por produto, especificação ou marca..." value="{{ request.GET.q|default:'' }}">
+      <button class="search-btn" type="submit">Buscar</button>
+    </form>
+
+    <div style="display:flex; gap:10px; align-items:center;">
+      <a href="{% url 'app:client_select_type' %}" class="btn-card btn-details" style="padding:10px 14px;">Área administrativa</a>
+    </div>
+  </div>
+
+  <!-- GRID DE PRODUTOS -->
+  {% if produtos %}
+    <div class="products-grid">
+      {% for p in produtos %}
+        <div class="product-card">
+          <a href="{% url 'produto_detalhes' p.id %}" style="text-decoration:none; color:inherit;">
+            <div class="product-media">
+              {% if p.imagem %}
+                <img src="{{ p.imagem.url }}" alt="{{ p.nome }}">
+              {% else %}
+                <img src="{% static 'images/placeholder-product.png' %}" alt="sem imagem">
+              {% endif %}
+            </div>
+
+            <div class="product-body">
+              <div class="product-title">
+                <span>{{ p.nome }}</span>
+                <span class="product-price">R$ {{ p.preco|floatformat:2 }}</span>
+              </div>
+
+              <div class="product-desc">
+                {{ p.descricao|truncatechars:110 }}
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+                <div>
+                  {% if p.em_estoque %}
+                    <span class="stock-badge in-stock">✅ Em estoque</span>
+                  {% elif p.estoque == 0 %}
+                    <span class="stock-badge out-stock">❌ Esgotado</span>
+                  {% else %}
+                    <span class="stock-badge low-stock">⚠ Poucas unidades</span>
+                  {% endif %}
+                </div>
+
+                <div class="product-actions">
+                  <a href="{% url 'produto_detalhes' p.id %}" class="btn-card btn-details">Ver detalhes</a>
+                  {% if p.em_estoque %}
+                    <form method="post" action="{% url 'adicionar_carrinho' %}" style="display:inline;">
+                      {% csrf_token %}
+                      <input type="hidden" name="produto_id" value="{{ p.id }}">
+                      <button class="btn-card btn-buy" type="submit">🛒 Adicionar</button>
+                    </form>
+                  {% else %}
+                    <button class="btn-card btn-buy" disabled>Indisponível</button>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- PAGINAÇÃO SIMPLES (se estiver usando paginate) -->
+    {% if is_paginated %}
+      <div class="pagination">
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pag-page">Anterior</a>
+        {% endif %}
+        <span class="pag-page">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pag-page">Próxima</a>
+        {% endif %}
+      </div>
+    {% endif %}
+
+  {% else %}
+    <div class="products-empty">
+      <p>Nenhum produto encontrado nesta categoria.</p>
+      <a href="{% url 'home' %}" class="btn-card btn-details">Ver todos os produtos</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

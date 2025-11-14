@@ -1,0 +1,315 @@
+/* ============================================================
+   TEMA SOLAR COMPLETO
+   Paleta:
+   Amarelo Solar: #F9C600
+   Laranja Solar: #FF9800
+   Grafite: #2C2C2C
+   Branco: #FFFFFF
+   ============================================================ */
+
+/* ---------- DARK MODE VARIÁVEIS ---------- */
+:root {
+    --bg: #f8f8f8;
+    --text: #2c2c2c;
+    --card-bg: #ffffff;
+    --border: #ccc;
+    --nav-bg: #2c2c2c;
+    --nav-text: #ffffff;
+    --primary: #f9c600;
+    --primary-hover: #ffdd4d;
+    --secondary: #2c2c2c;
+    --danger: #e53935;
+}
+
+[data-theme="dark"] {
+    --bg: #1c1c1c;
+    --text: #f5f5f5;
+    --card-bg: #2c2c2c;
+    --border: #555;
+    --nav-bg: #111;
+    --nav-text: #f9c600;
+}
+
+/* ---------- GLOBAL ---------- */
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+}
+
+.container {
+    width: 95%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.page {
+    margin-top: 25px;
+}
+
+/* ---------- NAVBAR ---------- */
+
+.navbar {
+    background: var(--nav-bg);
+    padding: 14px 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: background 0.3s;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    color: var(--nav-text);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    color: var(--primary);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.theme-btn {
+    background: none;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.theme-btn:hover {
+    background: var(--primary);
+    color: #000;
+}
+
+/* ---------- BOTÕES ---------- */
+
+.btn {
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.25s;
+    text-decoration: none;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #000;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+.btn-secondary {
+    background: var(--secondary);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #000;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c62828;
+}
+
+.btn-link {
+    color: var(--primary);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* ---------- CARDS ---------- */
+
+.card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: background 0.3s, color 0.3s;
+}
+
+.stat-card {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* ---------- DASHBOARD GRID ---------- */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    gap: 20px;
+}
+
+/* ---------- RECENTES ---------- */
+
+.recent-list {
+    list-style: none;
+    padding: 0;
+}
+
+.recent-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+/* ---------- TABLE ---------- */
+
+.table-container {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 25px;
+    border: 1px solid var(--border);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th {
+    background: var(--primary);
+    color: #000;
+    padding: 12px;
+    text-align: left;
+}
+
+table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+table tr:hover {
+    background: rgba(249,198,0,0.15);
+}
+
+/* ---------- FORM ---------- */
+
+form label {
+    font-weight: bold;
+}
+
+form input, form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    transition: 0.3s;
+}
+
+form input:focus, form select:focus, form textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 4px var(--primary);
+    outline: none;
+}
+
+/* ---------- LOGIN & REGISTER ---------- */
+
+.login-container {
+    display: flex;
+    justify-content: center;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 380px;
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+}
+
+.login-card h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.login-error {
+    background: #ffdddd;
+    color: #b30000;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* ---------- CLIENTE SELECT PF/PJ ---------- */
+
+.solar-select {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.solar-select .grid {
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+    display: grid;
+    gap: 15px;
+}
+
+.btn-lg {
+    padding: 16px;
+    font-size: 20px;
+}
+
+/* ---------- DELETE CONFIRM ---------- */
+
+.delete-warning {
+    background: rgba(255,152,0,0.2);
+    padding: 15px;
+    border-left: 5px solid var(--primary);
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 720px) {
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+    }
+}
