@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     {% if object %}
@@ -33,4 +34,9 @@
         <a href="{% url 'app:client_list' %}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/masks.js' %}"></script>
+<script src="https://unpkg.com/imask"></script>
 {% endblock %}

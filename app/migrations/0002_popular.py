@@ -1,6 +1,7 @@
 from django.db import migrations
 from django.core.files import File
 from django.conf import settings
+from django.utils.text import slugify
 import os
 
 def criar_produtos(apps, schema_editor):
@@ -41,11 +42,26 @@ def criar_produtos(apps, schema_editor):
 
         ("Componentes Elétricos", "Disjuntor CC 600V 32A", "Proteção essencial em sistemas fotovoltaicos.", 39.90, "disjuntor-cc-600v-32a-ai.jpg"),
         ("Componentes Elétricos", "DPS 1000V Tipo 2", "Proteção contra surtos elétricos.", 79.90, "dps-1000v-ai.jpg"),
-        ("Componentes Elétricos", "Chave Seccionadora 1000V 32A", "Segurança e isolamento no sistema solar.", 149.90, "chave-seccionadora-1000v-ai.jpg"),
+        ("Componentes Elétricos", "Chave Seccionadora 1000V 32A", "Segurança e isolamento no sistema solar.", 149.90, "chave-seccionadora-1000v-32a-ai.jpg"),
     ]
 
     for categoria_nome, nome, desc, preco, imagem in produtos:
-        cat, _ = Categoria.objects.get_or_create(nome=categoria_nome)
+
+        # ==== Garantir slug único =====
+        base_slug = slugify(categoria_nome)
+        slug = base_slug
+        i = 1
+        while Categoria.objects.filter(slug=slug).exists():
+            slug = f"{base_slug}-{i}"
+            i += 1
+
+        # Criar ou pegar categoria
+        cat, created = Categoria.objects.get_or_create(
+            nome=categoria_nome,
+            defaults={'slug': slug}
+        )
+
+        # Criar ou pegar produto
         p, created = Produto.objects.get_or_create(
             nome=nome,
             defaults={
@@ -55,16 +71,17 @@ def criar_produtos(apps, schema_editor):
                 'estoque': 10,
             }
         )
-        # se arquivo existe localmente, anexa a imagem
+
+        # Anexar imagem, se existir
         img_path = os.path.join(base, imagem)
         if os.path.exists(img_path):
-            # reabre e salva no campo imagem
             with open(img_path, "rb") as f:
                 p.imagem.save(imagem, File(f), save=True)
 
+
 class Migration(migrations.Migration):
     dependencies = [
-        ('app', '0001_initial'),  # ajuste conforme necessário
+        ('app', '0001_initial'),
     ]
 
     operations = [

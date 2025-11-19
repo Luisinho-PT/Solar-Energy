@@ -70,7 +70,7 @@ class Produto(models.Model):
     nome = models.CharField(max_length=150)
     descricao = models.TextField()
     preco = models.DecimalField(max_digits=10, decimal_places=2)
-    imagem = models.ImageField(upload_to="produtos/")
+    imagem = models.ImageField(upload_to="static/images/")
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name="produtos")
     estoque = models.PositiveIntegerField(default=0)
 

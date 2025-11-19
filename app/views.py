@@ -175,17 +175,35 @@ class PessoaJuridicaDeleteView(DeleteView):
 #  PRODUTOS (CADASTRO)
 # ==========================
 
-@method_decorator(staff_required, name='dispatch')
-class ProdutoCreateView(CreateView):
-    model = Produto
-    form_class = ProdutoForm
-    template_name = "loja/produto_form.html"
-    success_url = reverse_lazy('home')
+@staff_required
+def produto_novo(request):
+    categorias = Categoria.objects.all()
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["categorias"] = Categoria.objects.all()
-        return context
+    if request.method == "POST":
+        nome = request.POST.get("nome")
+        descricao = request.POST.get("descricao")
+        preco = request.POST.get("preco")
+        categoria_id = request.POST.get("categoria")
+        imagem = request.FILES.get("imagem")
+        estoque = request.POST.get("estoque", 0)
+
+        # Criar o produto no banco
+        Produto.objects.create(
+            nome=nome,
+            descricao=descricao,
+            preco=preco,
+            categoria_id=categoria_id,
+            imagem=imagem,
+            estoque=estoque
+        )
+
+        messages.success(request, "Produto criado com sucesso!")
+        return redirect("home")
+
+    return render(request, "loja/produto_form.html", {
+        "categorias": categorias
+    })
+
 
 
 def carrinho_view(request):

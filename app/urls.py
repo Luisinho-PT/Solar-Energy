@@ -35,7 +35,8 @@ urlpatterns = [
 
     # DETALHES DO PRODUTO
     path("produto/<int:id>/", produto_detalhes, name="produto_detalhes"),
-    path("produtos/novo/", ProdutoCreateView.as_view(), name="produto_novo"),
+    path("produtos/novo/", produto_novo, name="produto_novo"),
+
 
     # --- CARRINHO ---
     path("carrinho/", carrinho_view, name="carrinho"),
