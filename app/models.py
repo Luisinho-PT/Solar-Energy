@@ -1,6 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django_cpf_cnpj.fields import CPFField, CNPJField
 from django.utils.translation import gettext_lazy as _
+from django.utils.text import slugify
 
 # 1. O MODELO BASE (Não cria uma tabela)
 class ClientBase(models.Model):
@@ -49,20 +51,20 @@ class PessoaJuridica(ClientBase):
     def __str__(self):
         return self.company_name
     
-class Categoria(models.Model):
-    CATEGORIAS = [
-        ("inversores", "Inversores"),
-        ("cabos", "Cabos"),
-        ("estruturas", "Estruturas Inox"),
-        ("parafusos", "Parafusos"),
-        ("baterias", "Baterias"),
-    ]
 
-    slug = models.CharField(max_length=50, choices=CATEGORIAS, unique=True)
-    nome = models.CharField(max_length=100)
+class Categoria(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=120, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        # cria slug automaticamente baseado no nome
+        if not self.slug:
+            self.slug = slugify(self.nome)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.nome
+
     
 class Produto(models.Model):
     nome = models.CharField(max_length=150)
@@ -77,3 +79,31 @@ class Produto(models.Model):
 
     def em_estoque(self):
         return self.estoque > 0
+
+class Pedido(models.Model):
+    TIPO_CLIENTE = [
+        ("PF", "Pessoa Física"),
+        ("PJ", "Pessoa Jurídica"),
+    ]
+
+    tipo_cliente = models.CharField(max_length=2, choices=TIPO_CLIENTE)
+    pessoa_fisica = models.ForeignKey(PessoaFisica, on_delete=models.SET_NULL, null=True, blank=True)
+    pessoa_juridica = models.ForeignKey(PessoaJuridica, on_delete=models.SET_NULL, null=True, blank=True)
+
+    vendedor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    data = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Pedido #{self.id} - {self.total}"
+    
+
+class ItemPedido(models.Model):
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name="itens")
+    produto = models.ForeignKey(Produto, on_delete=models.SET_NULL, null=True)
+    quantidade = models.PositiveIntegerField(default=1)
+    preco_unitario = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def subtotal(self):
+        return self.preco_unitario * self.quantidade

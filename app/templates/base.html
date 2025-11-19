@@ -1,15 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Solar Energy{% endblock %}</title>
-
-    {% load static %}
-
     <link rel="stylesheet" href="{% static 'css/solar.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defer src="{% static 'js/theme.js' %}"></script>
+    {% block extra_css %}{% endblock %}
 </head>
 
 <body>
@@ -26,6 +25,7 @@
                 <a href="{% url 'home' %}">Dashboard</a>
                 <a href="{% url 'app:client_list' %}">Clientes</a>
                 <a href="{% url 'app:produto_novo' %}">➕ Adicionar Produto</a>
+                <a href="{% url 'app:carrinho' %}">🛒 Carrinho ({{ request.session.cart|length|default:0 }})</a>
                 <a href="{% url 'profile' %}">Perfil</a>
 
                 <!-- BOTÃO DARK MODE -->

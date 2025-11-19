@@ -37,4 +37,13 @@ urlpatterns = [
     path("produto/<int:id>/", produto_detalhes, name="produto_detalhes"),
     path("produtos/novo/", ProdutoCreateView.as_view(), name="produto_novo"),
 
+    # --- CARRINHO ---
+    path("carrinho/", carrinho_view, name="carrinho"),
+    path("carrinho/add/", add_carrinho, name="add_carrinho"),
+    path("carrinho/remove/<int:id>/", remove_carrinho, name="remove_carrinho"),
+    path("carrinho/update/", update_carrinho, name="update_carrinho"),
+    path("carrinho/clear/", clear_carrinho, name="clear_carrinho"),
+
+    path("checkout/", checkout, name="checkout"),
+
 ]

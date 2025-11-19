@@ -1,0 +1,187 @@
+/* ===========================
+   VARIÁVEIS DO TEMA
+=========================== */
+:root {
+    /* LIGHT MODE */
+    --bg: #f6f6f6;
+    --bg-card: #ffffff;
+    --text: #222;
+    --text-light: #555;
+    --border: #ddd;
+    --accent: #ffa600;
+    --accent-hover: #ff8c00;
+    --remove: #ff4c4c;
+}
+
+html[data-theme='dark'] {
+    --bg: #121212;
+    --bg-card: #1e1e1e;
+    --text: #f1f1f1;
+    --text-light: #a5a5a5;
+    --border: #333;
+    --accent: #ff9d00;
+    --accent-hover: #ffa600;
+    --remove: #ff6f6f;
+}
+
+/* ===========================
+   LAYOUT
+=========================== */
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+.carrinho-container {
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: 14px;
+    margin: 30px auto;
+    max-width: 1100px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.25);
+}
+
+/* ===========================
+   TÍTULO
+=========================== */
+.carrinho-title {
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+/* ===========================
+   ITEM DO CARRINHO
+=========================== */
+.carrinho-item {
+    padding: 25px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.carrinho-item h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.carrinho-item p {
+    font-size: 1rem;
+    color: var(--text-light);
+}
+
+/* ===========================
+   QUANTIDADE
+=========================== */
+.qtd-box {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qtd-input {
+    width: 80px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 1rem;
+}
+
+.btn-atualizar {
+    padding: 10px 18px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-atualizar:hover {
+    background: var(--accent-hover);
+}
+
+/* ===========================
+   BOTÃO REMOVER
+=========================== */
+.remove-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    color: var(--remove);
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.remove-btn:hover {
+    opacity: 0.7;
+    transform: translateX(3px);
+}
+
+/* ===========================
+   PREÇO DO ITEM
+=========================== */
+.preco-item {
+    margin-top: 8px;
+    font-weight: bold;
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+
+/* ===========================
+   TOTAL
+=========================== */
+.carrinho-total {
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin-top: 25px;
+}
+
+/* ===========================
+   BOTÕES INFERIORES
+=========================== */
+.carrinho-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+}
+
+.btn-clear,
+.btn-finalizar {
+    padding: 14px 26px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* LIMPAR */
+.btn-clear {
+    background: #d1d1d1;
+    color: #222;
+}
+
+html[data-theme='dark'] .btn-clear {
+    background: #333;
+    color: #eee;
+}
+
+.btn-clear:hover {
+    opacity: 0.85;
+}
+
+/* FINALIZAR */
+.btn-finalizar {
+    background: var(--accent);
+    color: #fff;
+    transition: 0.2s;
+}
+
+.btn-finalizar:hover {
+    background: var(--accent-hover);
+    transform: scale(1.03);
+}

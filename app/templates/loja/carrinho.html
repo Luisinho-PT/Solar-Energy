@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Seu Carrinho{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/carrinho.css' %}">
+{% endblock %}
+{% block content %}
+<h1>Carrinho de Compras</h1>
+
+{% if cart %}
+<div class="cart-container">
+
+  {% for item in cart %}
+  <div class="cart-item">
+
+    <img src="{{ item.imagem }}" class="cart-img">
+
+    <div class="cart-info">
+      <h3>{{ item.nome }}</h3>
+      <p>Preço: R$ {{ item.preco }}</p>
+
+      <form action="{% url 'app:update_carrinho' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="produto_id" value="{{ item.id }}">
+        <input class="qtd-box" type="number" name="quantidade" value="{{ item.quantidade }}" min="1">
+        <button class="btn-small" type="submit">Atualizar</button>
+      </form>
+
+      <a class="remove-btn" href="{% url 'app:remove_carrinho' item.id %}">❌ Remover</a>
+    </div>
+
+    <div class="cart-total">
+      R$ {{ item.total }}
+    </div>
+
+  </div>
+  {% endfor %}
+
+  <hr>
+
+  <h2>Total: R$ {{ total }}</h2>
+
+  <a href="{% url 'app:clear_carrinho' %}" class="btn-clear">Limpar carrinho</a>
+  <a href="{% url 'app:checkout' %}" class="btn-buy">Finalizar Compra</a>
+
+</div>
+
+{% else %}
+<p>Seu carrinho está vazio!</p>
+{% endif %}
+
+{% endblock %}

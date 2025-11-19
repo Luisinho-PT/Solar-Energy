@@ -1,69 +1,80 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Adicionar Produto{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/produto_form.css' %}">
+{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/loja.css' %}">
+<div class="produto-wrapper">
 
-<div class="loja-container" style="max-width: 760px;">
+    <!-- FORM -->
+    <div class="form-area">
+        <h1 class="title">➕ Adicionar Novo Produto</h1>
+        <p class="subtitle">Preencha os dados abaixo para cadastrar um novo item no catálogo.</p>
 
-    <h1 style="margin-bottom:12px;">➕ Adicionar Novo Produto</h1>
-    <p style="color:var(--muted); margin-bottom:20px;">
-        Preencha os dados abaixo para cadastrar um novo item no catálogo solar.
-    </p>
+        <form method="post" enctype="multipart/form-data" id="produtoForm">
+            {% csrf_token %}
 
-    <form method="post" enctype="multipart/form-data" class="produto-form">
-        {% csrf_token %}
+            <!-- Nome -->
+            <label>Nome do Produto</label>
+            <input type="text" name="nome" id="nomeInput" required>
 
-        <!-- Nome -->
-        <label class="form-label">Nome do Produto</label>
-        {{ form.nome }}
+            <!-- Descrição -->
+            <label>Descrição</label>
+            <textarea name="descricao" id="descricaoInput" rows="4" required></textarea>
 
-        <!-- Descrição -->
-        <label class="form-label">Descrição</label>
-        {{ form.descricao }}
+            <!-- Categoria -->
+            <label>Categoria</label>
+            <select name="categoria" id="categoriaInput" required>
+                <option value="">Selecione...</option>
+                {% for cat in categorias %}
+                    <option value="{{ cat.id }}">{{ cat.nome }}</option>
+                {% endfor %}
+            </select>
 
-        <!-- Preço -->
-        <label class="form-label">Preço</label>
-        {{ form.preco }}
+            <!-- Preço -->
+            <label>Preço</label>
+            <input type="number" step="0.01" min="0" name="preco" id="precoInput" required>
 
-        <!-- Estoque -->
-        <label class="form-label">Estoque disponível</label>
-        {{ form.estoque }}
+            <!-- Imagem -->
+            <label>Imagem do Produto</label>
+            <input type="file" name="imagem" id="imagemInput" accept="image/*">
 
-        <!-- Categoria -->
-        <label class="form-label">Categoria</label>
-        {{ form.categoria }}
+            <button class="btn-submit" type="submit">Salvar Produto</button>
+        </form>
+    </div>
 
-        <!-- Imagem -->
-        <label class="form-label">Imagem do Produto</label>
-        {{ form.imagem }}
+    <!-- PREVIEW -->
+    <div class="preview-area">
+        <h2>Pré-visualização</h2>
 
-        <div id="previewBox" style="margin-top:20px; display:none;">
-            <h4>Prévia:</h4>
-            <img id="imagePreview" src="" style="max-width:200px; border-radius:10px;">
+        <div class="product-card preview-card" id="previewCard">
+            <div class="product-media">
+                <img id="previewImg" src="{% static 'images/placeholder-product.png' %}">
+            </div>
+
+            <div class="product-body">
+                <div class="product-title">
+                    <span id="previewNome">Nome do Produto</span>
+                    <span class="product-price" id="previewPreco">R$ 0,00</span>
+                </div>
+
+                <div class="product-category" id="previewCategoria">Categoria</div>
+
+                <div class="product-desc" id="previewDesc">
+                    A descrição do produto aparecerá aqui...
+                </div>
+
+                <div class="product-actions">
+                    <button class="btn-card btn-details">Ver detalhes</button>
+                    <button class="btn-card btn-buy">🛒 Adicionar</button>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <button class="btn-buy" type="submit" style="margin-top:18px; width:100%;">
-            Salvar Produto
-        </button>
-    </form>
 </div>
 
-<script>
-const inputImg = document.querySelector("input[type='file']");
-const previewBox = document.getElementById("previewBox");
-const previewImg = document.getElementById("imagePreview");
-
-if (inputImg) {
-    inputImg.addEventListener("change", function() {
-        const file = this.files[0];
-        if (file) {
-            previewImg.src = URL.createObjectURL(file);
-            previewBox.style.display = "block";
-        }
-    });
-}
-</script>
-
+<script src="{% static 'js/produto_form.js' %}"></script>
 {% endblock %}

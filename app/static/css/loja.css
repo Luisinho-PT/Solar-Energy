@@ -346,6 +346,81 @@ body{
   transform: translateY(0);
 }
 
+/* ================================
+   MODO ESCURO — LOJA
+   ================================ */
+html[data-theme="dark"] body {
+    background: #1e1e1e;
+    color: #eee;
+}
+
+/* categorias */
+html[data-theme="dark"] .category-bar {
+    background: #2a2a2a;
+    border-color: rgba(255,255,255,0.07);
+}
+
+html[data-theme="dark"] .category-item {
+    color: #fff;
+}
+
+html[data-theme="dark"] .category-item.active {
+    background: rgba(255,200,50,0.15);
+    border-bottom-color: #f9c600;
+}
+
+/* cards */
+html[data-theme="dark"] .product-card {
+    background: #2a2a2a;
+    border-color: rgba(255,255,255,0.07);
+    box-shadow: none;
+}
+
+html[data-theme="dark"] .product-title {
+    color: #fff;
+}
+
+html[data-theme="dark"] .product-desc {
+    color: #ccc;
+}
+
+/* preço */
+html[data-theme="dark"] .product-price {
+    color: #ffd34a;
+}
+
+/* badge stock */
+html[data-theme="dark"] .in-stock {
+    background: rgba(100,255,100,0.15);
+    color: #4be26e;
+}
+
+html[data-theme="dark"] .low-stock {
+    background: rgba(255,210,100,0.15);
+    color: #ffc44a;
+}
+
+html[data-theme="dark"] .out-stock {
+    background: rgba(255,80,80,0.15);
+    color: #ff7373;
+}
+
+/* detalhes */
+html[data-theme="dark"] .product-detail,
+html[data-theme="dark"] .detail-info,
+html[data-theme="dark"] .detail-media {
+    background: #2a2a2a;
+    color: #eee;
+}
+
+/* paginacao */
+html[data-theme="dark"] .pagination .pag-page {
+    background: #262626;
+    border-color: rgba(255,255,255,0.07);
+    color: #fff;
+}
+
+
 /* MOBILE */
 @media (max-width:720px){
   .category-bar{ padding:8px; gap:6px; }

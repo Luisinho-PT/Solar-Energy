@@ -1,0 +1,118 @@
+/* LAYOUT - duas colunas */
+.produto-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.form-area {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.preview-area h2 {
+    margin-bottom: 14px;
+}
+
+/* FORM STYLES */
+label {
+    font-weight: 700;
+    margin-top: 12px;
+    display: block;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid rgba(0,0,0,0.15);
+    border-radius: 8px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+
+input:invalid, textarea:invalid, select:invalid {
+    border-color: #d9534f;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: var(--solar-orange);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+
+/* PREVIEW CARD (igual da loja) */
+.preview-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.06);
+    overflow: hidden;
+    transition: 0.25s ease;
+    box-shadow: 0 12px 26px rgba(0,0,0,0.07);
+}
+
+.preview-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+}
+
+.product-media {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.product-media img {
+    max-height: 180px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* conteúdo */
+.product-body {
+    padding: 16px;
+}
+
+.product-title {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.product-category {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 10px;
+}
+
+.product-desc {
+    font-size: 14px;
+    color: var(--muted);
+    min-height: 40px;
+}
+
+.product-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.btn-card {
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.07);
+    cursor: pointer;
+}
+
+.btn-buy {
+    background: var(--solar-orange);
+    color: #fff;
+}
