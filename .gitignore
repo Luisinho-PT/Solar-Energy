@@ -28,7 +28,6 @@ db.sqlite3-journal
 /dist/
 
 # Local settings
-.env
 .env.local
 .env.*.local
 secrets.json

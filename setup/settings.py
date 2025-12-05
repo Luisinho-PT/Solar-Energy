@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -129,10 +133,11 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # STRIPE CONFIGURATION
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51Sa50JGhzYUG058xsgmL7nO0KyOB0gqciDZkUyiu4ZPBMOHQCyPNZuFan9itVjjBjlu4wLoCRw9f548Gx09DsIVW00gKBN7Oqs' # Coloque sua chave pública aqui
-STRIPE_SECRET_KEY = 'sk_test_51Sa50JGhzYUG058xIaqyP1ymMVTHE9Ebq9Pyj5VExQAZ1JxTorEC2ktXWUWy7hJxG0pSxJv8oJzypqhlRduf0mP000zm5sGboS'      # Coloque sua chave secreta aqui
-STRIPE_WEBHOOK_SECRET = 'whsec_...'    # Você pegará isso no dashboard do Stripe depois
+
 
 # Configuração de E-mail para Testes (Imprime no terminal onde o runserver está rodando)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'loja@seusite.com.br'
+
+STRIPE_PUBLIC_KEY = os.getenv("STRIPE_PUBLIC_KEY", "")
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY", "")
