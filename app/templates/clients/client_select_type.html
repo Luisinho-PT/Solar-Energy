@@ -1,24 +1,72 @@
 {% extends 'base.html' %}
 
-{% block title %}Selecionar Tipo de Cliente{% endblock %}
-
 {% block content %}
-<h1>Adicionar Novo Cliente</h1>
-<p>Selecione o tipo de cliente que deseja cadastrar.</p>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="text-center w-100">
+        <h2 class="text-warning mb-5 fw-bold">Escolha o tipo de conta</h2>
+        
+        <div class="row g-4 justify-content-center">
+            <!-- Opção Pessoa Física -->
+            <div class="col-md-5 col-lg-4">
+                <a href="{% url 'app:cadastro_pf' %}" class="text-decoration-none">
+                    <div class="card bg-dark border-secondary h-100 shadow hover-card card-transition">
+                        <div class="card-body p-5">
+                            <div class="mb-4 display-4 text-warning icon-animate">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3 class="card-title text-white fw-bold">Pessoa Física</h3>
+                            <p class="card-text text-secondary mt-3">
+                                Para você que quer comprar produtos para sua casa ou uso pessoal.
+                            </p>
+                            <span class="btn btn-outline-warning w-100 mt-4 fw-bold">Criar Conta PF</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
-<div class="solar-select">
-    <div class="grid">
-        <a href="{% url 'app:client_create_pf' %}" class="btn btn-primary btn-lg">
-            Pessoa Física (PF)
-        </a>
-
-        <a href="{% url 'app:client_create_pj' %}" class="btn btn-secondary btn-lg">
-            Pessoa Jurídica (PJ)
-        </a>
-    </div>
-
-    <div style="margin-top: 20px;">
-        <a href="{% url 'app:client_list' %}" class="btn btn-link">Cancelar</a>
+            <!-- Opção Pessoa Jurídica -->
+            <div class="col-md-5 col-lg-4">
+                <a href="{% url 'app:cadastro_pj' %}" class="text-decoration-none">
+                    <div class="card bg-dark border-secondary h-100 shadow hover-card card-transition">
+                        <div class="card-body p-5">
+                            <div class="mb-4 display-4 text-warning icon-animate">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h3 class="card-title text-white fw-bold">Pessoa Jurídica</h3>
+                            <p class="card-text text-secondary mt-3">
+                                Para empresas, revendedores e instaladores que buscam atacado.
+                            </p>
+                            <span class="btn btn-outline-warning w-100 mt-4 fw-bold">Criar Conta PJ</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="mt-5">
+            <p class="text-secondary">
+                Já possui cadastro? <a href="{% url 'app:login' %}" class="text-warning text-decoration-none fw-bold hover-underline">Faça login aqui</a>
+            </p>
+        </div>
     </div>
 </div>
+
+<style>
+    /* Efeitos de Hover para os Cards */
+    .card-transition {
+        transition: all 0.3s ease;
+    }
+    .hover-card:hover {
+        transform: translateY(-10px);
+        border-color: #ffc107 !important;
+        box-shadow: 0 10px 20px rgba(255, 193, 7, 0.15) !important;
+    }
+    .hover-card:hover .icon-animate {
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+    }
+    .hover-underline:hover {
+        text-decoration: underline !important;
+    }
+</style>
 {% endblock %}

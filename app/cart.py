@@ -1,3 +1,4 @@
+# app/cart.py
 from decimal import Decimal
 from app.models import Produto
 

@@ -30,10 +30,25 @@
 
                 <!-- BOTÃO DARK MODE -->
                 <button id="themeToggle" class="theme-btn">🌙</button>
+                <div class="d-flex align-items-center">
+                    <!-- Verifica se está logado E se NÃO é admin (staff) -->
+                    <!-- Assim, admins verão o botão 'Entrar' como se fossem visitantes -->
+                    {% if user.is_authenticated and not user.is_staff %}
+                        
+                        <span class="me-3 text-light">Olá, {{ user.username }}</span>
+                        
+                        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-light btn-sm">Sair</button>
+                        </form>
 
-                <a href="{% url 'logout' %}" class="btn btn-secondary" style="margin-left:10px;">
-                    Sair
-                </a>
+                    {% else %}
+                        
+                        <!-- Mostra botão ENTRAR para visitantes ou para o Admin -->
+                        <a href="{% url 'login' %}" class="btn btn-warning btn-sm">Entrar</a>
+
+                    {% endif %}
+                </div>
             </div>
         </div>
     </nav>

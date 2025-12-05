@@ -25,8 +25,11 @@ class ClientBase(models.Model):
 
 # 2. TABELA SEPARADA PARA PESSOA FÍSICA
 class PessoaFisica(ClientBase):
+    # Vínculo com o Usuário do Django (Login)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='pessoa_fisica', null=True, blank=True)
+    
     name = models.CharField(_('Nome'), max_length=150)
-    cpf = CPFField(masked=True, unique=True) # Agora é obrigatório
+    cpf = CPFField(masked=True, unique=True)
     rg = models.CharField(_('RG'), max_length=20, blank=True, null=True)
     birth_date = models.DateField(_('Data de Nascimento'), blank=True, null=True)
 
@@ -39,9 +42,12 @@ class PessoaFisica(ClientBase):
 
 # 3. TABELA SEPARADA PARA PESSOA JURÍDICA
 class PessoaJuridica(ClientBase):
+    # Vínculo com o Usuário do Django (Login)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='pessoa_juridica', null=True, blank=True)
+    
     company_name = models.CharField(_('Razão Social'), max_length=150)
     fantasy_name = models.CharField(_('Nome de Fantasia'), max_length=150, blank=True, null=True)
-    cnpj = CNPJField(masked=True, unique=True) # Agora é obrigatório
+    cnpj = CNPJField(masked=True, unique=True)
     inscricao_estadual = models.CharField(_('Inscrição Estadual'), max_length=20, blank=True, null=True)
     
     class Meta:
@@ -73,9 +79,12 @@ class Produto(models.Model):
     imagem = models.ImageField(upload_to="produtos/")
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name="produtos")
     estoque = models.PositiveIntegerField(default=0)
+    pago = models.BooleanField(default=False)
+    stripe_checkout_id = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
-        return self.nome
+        status = "PAGO" if self.pago else "PENDENTE"
+        return f"{self.nome} ({status})"
 
     def em_estoque(self):
         return self.estoque > 0
@@ -94,6 +103,10 @@ class Pedido(models.Model):
 
     total = models.DecimalField(max_digits=10, decimal_places=2)
     data = models.DateTimeField(auto_now_add=True)
+    
+    # Campo auxiliar para controle do stripe
+    pago = models.BooleanField(default=False)
+    stripe_checkout_id = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return f"Pedido #{self.id} - {self.total}"
